@@ -1,0 +1,119 @@
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+CIS 120 Game Project Proposal
+PennKey: _50011175____
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
+
+===============
+=: Space Invaders :=
+===============
+
+- What game are you planning to implement? If it is a game of your own design,
+  or not especially well-known, provide a 2-3 sentence description of the game.
+ 
+ 	I am going to implement Space Invaders
+
+- What classes and interfaces do you plan to create? How will the different
+  components of your game (the model, the GUI, etc.) interact?
+
+    I am going to implement the movable class that will provide basic functionalities of any 
+    moving objects in the game. An instance of movable stores the location, speed, and image of the
+    moving object. Classes that extend movable include player, enemy, fire, and bomb. Player class 
+    creates an instance of player and register arrow and space presses to control the movement of 
+    the player and firing of weapon. Enemy class creates an instance of enemy and contains the inner
+    class bomb to fire at the player. Fire class creates instance of bullet/missile the player 
+    launched. Board class implements Runnable and extends JPanel and actually runs the game. It
+    stores aliens as an array and use iterator to update the state of aliens and the bomb they 
+    fired. Board class also updates the state of the players and keep track of the missile/bullet 
+    they fired. The class is also responsible for keeping track of player's health to determine
+    whether to advance the game to the next level or game over. Board class will also use Swing 
+    timer to animate the game.       
+
+- What do you think will be the most challenging thing to implement?
+
+	I think the most challenging thing to implement is the movement of the aliens. In my Space 
+	Invaders, aliens not only advance by moving horizontally until they reach the end of the window,
+	but they can also move in a snake like fashion or even move in a curve. The challenge is to 
+	represent interesting paths aliens going to follow.  
+====================
+=: Core Concept 1 :=
+====================
+
+Concept 1: ___Inheritance/Subtyping____
+
+- What specific feature of your game will be implemented using this concept?
+
+	We will use an inheritance hierarchy to model different types of shapes in the Space Invaders 
+	game
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+	Since there are different types of moving objects in the Space Invaders game it makes sense to
+	have a movable class. It doesn't make sense to have movable as an interface as opposed to a 
+	class because moving objects shares many common methods, such as setting the position of the 
+	moving objects and checking whether a moving object should still be displayed. If movable is an
+	interface many of the same code would have to be repeated. Examples of movable include the 
+	player, aliens, and bombs. Many implementations of those movables are exactly the same.   
+====================
+=: Core Concept 2 :=
+====================
+
+Concept 2: ___Using I/O____
+
+- What specific feature of your game will be implemented using this concept?
+
+	We will use I/O to keep track of high score and create arbitrary levels. 
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+	Every time we close and start the game we create a new instance of the Space Invaders game. 
+	All data such as high score from previous instance of the Space Invaders game will be lost. That
+	is why it makes sense to use I/O to write high scores out to a file and read them back in each
+    the game starts. In other words, there is no way of keeping high score without using I/O. It 
+    makes sense to do level design with I/O because the only things that vary with each level is the
+    number and type of aliens. Hard coding level design into the game requires many repetition of 
+    the same code.   
+====================
+=: Core Concept 3 :=
+====================
+
+Concept 3: ___JUnit Testing____
+
+- What specific feature of your game will be implemented using this concept?
+ 
+ 	We will test the collision of moving objects such as player, aliens, and bomb in the game.
+
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+	It makes sense to implement this feature with this concept because JUnit testing is a java 
+	library designed for this purpose. It makes sense to test collision because this is the core of
+	the game logic. If collision detection does not work correctly, then erasing aliens from the 
+	game after they are hit will also not work correctly. Without the ability to clear aliens away, 
+	level advancement will also fail to work. Furthermore, the player may not lose health after he 
+	is hit and the game will never end. Some of the edge cases we have considered are collision with
+	the side of the window and making sure that collision between bomb and missiles are ignored. My
+	test cases are not redundant because there are different types of collisions involving objects 
+	of different size.   
+====================
+=: Core Concept 4 :=
+====================
+
+Concept 4: ___Modeling state using collections____
+
+- What specific feature of your game will be implemented using this concept?
+
+	I am going to model the state of all aliens in the game using ArrayList 
+	
+- Why does it make sense to implement this feature with this concept? Justify
+  why this is a non-trivial application of the concept in question.
+
+	It makes sense to implement this feature with this concept because arraylist allows for indexing
+	while collections such as set does not. Set collection will also delete any duplicate aliens 
+	while providing no method to identify a particular alien and update its state. I choose
+	arraylist over array because array is not resizable, while arraylist allows for easy addition 
+	and removal of elements. This allows me to delete any aliens that are hit by player's missiles, 
+	clearing up unnecessary data. Lastly, it does not make sense to model aliens as a map because 
+	aliens are instances and not key and value pairings. 
+
